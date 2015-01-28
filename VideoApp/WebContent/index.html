@@ -1,0 +1,42 @@
+<!doctype html>
+<html ng-app = "app">
+	<head>
+		<title>Hello AngularJS</title>
+		<style>
+			tbody { display: block; overflow: auto; height: 680px; border-collapse: collapse; align : top;}
+		</style>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+    	<script src = "hello.js"></script>
+	</head>
+
+	<body>
+		<div  ng-controller="VideoCtrl" class="container">
+			<div align ="center">
+    				<h2>Search Your Videos</h2>
+    				<input ng-model="query" type="text" class="form-control"/>
+  			</div>
+			<div>
+			<table  class="table table-striped" >
+				<tbody when-scroll-ends="loadMoreRecords()">
+				<tr>
+					<th width = "15%">ID</th>
+					<th width = "25%"><a href="" ng-click="sortField ='title'; reverse = !reverse">Title</a></th>
+					<th width = "40%">Description</th>
+					<th width = "20%">Logo</th>
+				</tr>
+				<tr ng-repeat = "video in videos | filter:query | orderBy:sortField:reverse" >
+					<td>{{video.id}}</td>
+					<td>{{video.title}}</td>
+					<td>{{video.longDescription}}</td>
+					<td><img class="img-rounded" ng-src="{{video.links.logo_image}}" width = "165"/></td>
+				</tr>
+			 	</tbody>
+  			</table>
+  			</div>
+		</div>
+	</body>
+</html>
